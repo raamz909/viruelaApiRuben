@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 
-mongoose.connect('mongodb://localhost:27017/viruela_db')
+mongoose.connect('mongodb://mongo:27017/viruela_db')
   .then(() => {
     console.log('Connected to MongoDB');
   })

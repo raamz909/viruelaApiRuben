@@ -1,19 +1,38 @@
 version: '3'
+
 services:
   mongo:
-    image: mongo
+    image: mongo:latest
     container_name: mongo_container
     ports:
       - "27017:27017"
     volumes:
       - mongo-data:/data/db
+
   mongo-express:
-    image: mongo-express
+    image: mongo-express:latest
     container_name: mongo_express
     restart: always
     ports:
       - "8081:8081"
     environment:
       ME_CONFIG_MONGODB_SERVER: mongo
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: node_app
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/usr/src/app           # Sync your local project folder to the container's /usr/src/app
+      - /usr/src/app/node_modules # Prevent overwriting node_modules in the container
+    depends_on:
+      - mongo
+    environment:
+      - NODE_ENV=development
+    command: npm start
+
 volumes:
   mongo-data:
