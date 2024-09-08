@@ -1,6 +1,5 @@
-name: Publish Docker image
+name: Docker Image CI
 
-# Ejecuta el workflow en eventos de push a la rama main
 on:
   push:
     branches:
@@ -11,22 +10,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    # Paso 1: Revisa el repositorio
-    - name: Checkout repository
-      uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    # Paso 2: Configura Docker para autenticarse en Docker Hub
-    - name: Log in to Docker Hub
-      uses: docker/login-action@v2
-      with:
-        username: ${{ secrets.DOCKER_USERNAME }}gi
-        password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
 
-    # Paso 3: Construye la imagen Docker
-    - name: Build Docker image
-      run: docker build -t ${{ secrets.DOCKER_USERNAME }}/viruela-api:latest .
-
-    # Paso 4: Sube la imagen a Docker Hub ...
-    - name: Push Docker image
-      run: docker push ${{ secrets.DOCKER_USERNAME }}/viruela-api:latest
-#hola
+      - name: Build and push Docker image
+        run: |
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/viruela-api:latest .
+          docker push ${{ secrets.DOCKER_USERNAME }}/viruela-api:latest
