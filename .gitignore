@@ -1,0 +1,36 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Logs
+logs
+*.log
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Directorio de salida de coverage para pruebas
+coverage/
+
+# Entornos
+.env
+
+# Docker
+docker-compose.override.yml
+docker-compose.yml
+docker/data/
+
+# Directorios de compilación
+dist/
+build/
+
+# Archivos de configuración del editor
+.vscode/
+.idea/
+.DS_Store
+
+# Archivos de Git propios
+.git/
