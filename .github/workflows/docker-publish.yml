@@ -4,7 +4,7 @@ name: Publish Docker image
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   build:
@@ -19,7 +19,7 @@ jobs:
     - name: Log in to Docker Hub
       uses: docker/login-action@v2
       with:
-        username: ${{ secrets.DOCKER_USERNAME }}
+        username: ${{ secrets.DOCKER_USERNAME }}gi
         password: ${{ secrets.DOCKER_PASSWORD }}
 
     # Paso 3: Construye la imagen Docker
