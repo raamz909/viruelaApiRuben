@@ -80,3 +80,5 @@ export const deleteCase = async (req: Request, res: Response) => {
     res.status(500).json({ message: 'Error al eliminar el caso', error });
   }
 };
+
+//Hola
