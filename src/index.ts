@@ -42,16 +42,21 @@ cron.schedule('*/10 * * * * *', async () => {
 
     for (const caseItem of newCases) {
       console.log(`Procesando caso con ID: ${caseItem._id}`);
-
-      const emailText = `Nuevo caso de Viruela del Mono registrado.\nGénero: ${caseItem.genre}\nEdad: ${caseItem.age}\nUbicación: (${caseItem.lat}, ${caseItem.lng})\nSíntomas: ${caseItem.symptoms}`;
-      
-      const htmlBody = generateCaseEmailTemplate(caseItem.age, caseItem.genre, caseItem.lat, caseItem.lng, caseItem.symptoms);
-
-      await sendEmail('Nuevo caso registrado', htmlBody, caseItem.lat, caseItem.lng);
-
+    
+      const emailBody = generateCaseEmailTemplate(
+        caseItem.age,
+        caseItem.genre,
+        caseItem.lat,
+        caseItem.lng,
+        caseItem.symptoms
+      );
+    
+      await sendEmail('Nuevo caso registrado', emailBody);
+    
+      // Actualizar el campo isSent a true después de enviar el correo
       caseItem.isSent = true;
       await caseItem.save();
-
+    
       console.log(`Caso con ID: ${caseItem._id} procesado y correo enviado.`);
     }
 
