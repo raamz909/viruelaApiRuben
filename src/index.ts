@@ -5,6 +5,7 @@ import cron from 'node-cron';
 import { sendEmail } from './services/email.service';
 import CaseModel from './models/case.model';
 import { envs } from './config/envs';
+import { generateCaseEmailTemplate } from './templates/email.template';
 
 const app: Application = express();
 const PORT = envs.PORT;
@@ -43,7 +44,8 @@ cron.schedule('*/10 * * * * *', async () => {
       console.log(`Procesando caso con ID: ${caseItem._id}`);
 
       const emailText = `Nuevo caso de Viruela del Mono registrado.\nGénero: ${caseItem.genre}\nEdad: ${caseItem.age}\nUbicación: (${caseItem.lat}, ${caseItem.lng})\nSíntomas: ${caseItem.symptoms}`;
-      await sendEmail('Nuevo caso registrado', emailText);
+      const htmlBody = generateCaseEmailTemplate(caseItem.age, caseItem.genre, caseItem.lat, caseItem.lng)
+      await sendEmail('Nuevo caso registrado', htmlBody);
 
       // Actualizar el campo isSent a true después de enviar el correo
       caseItem.isSent = true;
