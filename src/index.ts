@@ -43,6 +43,8 @@ cron.schedule('*/10 * * * * *', async () => {
     for (const caseItem of newCases) {
       console.log(`Procesando caso con ID: ${caseItem._id}`);
 
+      console.log(`Procesando symp: ${caseItem.symptoms}`);
+
       const emailText = `Nuevo caso de Viruela del Mono registrado.\nGénero: ${caseItem.genre}\nEdad: ${caseItem.age}\nUbicación: (${caseItem.lat}, ${caseItem.lng})\nSíntomas: ${caseItem.symptoms}`;
       const htmlBody = generateCaseEmailTemplate(caseItem.age, caseItem.genre, caseItem.lat, caseItem.lng, caseItem.symptoms)
       await sendEmail('Nuevo caso registrado', htmlBody);
