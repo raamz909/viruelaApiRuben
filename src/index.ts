@@ -27,7 +27,7 @@ app.get('/', (req, res) => {
   res.send('API for Viruela del Mono');
 });
 
-// Aquí comienza el cron job
+//CRON  
 cron.schedule('*/10 * * * * *', async () => {
   try {
     console.log('Esperando a que se registren casos...');
@@ -43,13 +43,12 @@ cron.schedule('*/10 * * * * *', async () => {
     for (const caseItem of newCases) {
       console.log(`Procesando caso con ID: ${caseItem._id}`);
 
-      console.log(`Procesando symp: ${caseItem.symptoms}`);
-
       const emailText = `Nuevo caso de Viruela del Mono registrado.\nGénero: ${caseItem.genre}\nEdad: ${caseItem.age}\nUbicación: (${caseItem.lat}, ${caseItem.lng})\nSíntomas: ${caseItem.symptoms}`;
-      const htmlBody = generateCaseEmailTemplate(caseItem.age, caseItem.genre, caseItem.lat, caseItem.lng, caseItem.symptoms)
-      await sendEmail('Nuevo caso registrado', htmlBody);
+      
+      const htmlBody = generateCaseEmailTemplate(caseItem.age, caseItem.genre, caseItem.lat, caseItem.lng, caseItem.symptoms);
 
-      // Actualizar el campo isSent a true después de enviar el correo
+      await sendEmail('Nuevo caso registrado', htmlBody, caseItem.lat, caseItem.lng);
+
       caseItem.isSent = true;
       await caseItem.save();
 
@@ -61,7 +60,6 @@ cron.schedule('*/10 * * * * *', async () => {
   }
 });
 
-// Iniciar el servidor
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
