@@ -13,9 +13,9 @@ const transporter = nodemailer.createTransport({
 // Function to generate Mapbox image URL
 const getMapboxImageUrl = (lat: number, lng: number) => {
   const accessToken = process.env.MAPBOX_ACCESS_TOKEN;
-  const zoom = 12;
-  const width = 600;
-  const height = 400;
+  const zoom = 13;
+  const width = 800;
+  const height = 500;
   const mapStyle = 'streets-v11';
 
   return `https://api.mapbox.com/styles/v1/mapbox/${mapStyle}/static/${lng},${lat},${zoom}/${width}x${height}?access_token=${accessToken}`;
