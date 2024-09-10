@@ -4,7 +4,8 @@ export function generateCaseEmailTemplate(
   age: number,
   genre: string,
   lat: number,
-  lng: number
+  lng: number,
+  symptoms: string
 ): string {
   const mapImageUrl = generateMapboxStaticImageURL(lat, lng);
   return `
@@ -71,7 +72,7 @@ export function generateCaseEmailTemplate(
               <p><strong>age:</strong> ${age}</p>
               <p><strong>lat:</strong> ${lat}</p>
               <p><strong>lng:</strong> ${lng}</p>
-              <p><strong>symptoms:</strong> ${lng}</p>
+              <p><strong>symptoms:</strong> ${symptoms}</p>
           </div>
 
           <div>
