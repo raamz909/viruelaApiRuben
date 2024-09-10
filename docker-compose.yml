@@ -10,15 +10,10 @@ services:
       - mongo-data:/data/db
       
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: raamz909/viruela-api:latest
     container_name: node_app
     ports:
       - "3000:3000"
-    volumes:
-      - .:/usr/src/app           # Sync your local project folder to the container's /usr/src/app
-      - /usr/src/app/node_modules # Prevent overwriting node_modules in the container
     depends_on:
       - mongo
     environment:

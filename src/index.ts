@@ -4,13 +4,14 @@ import caseRoutes from './routes/case.routes';
 import cron from 'node-cron';
 import { sendEmail } from './services/email.service';
 import CaseModel from './models/case.model';
+import { envs } from './config/envs';
 
 const app: Application = express();
-const PORT = process.env.PORT || 3000;
+const PORT = envs.PORT;
 
 app.use(express.json());
 
-mongoose.connect('mongodb://mongo:27017/viruela_db')
+mongoose.connect(envs.MONGO_URL)
   .then(() => {
     console.log('Connected to MongoDB');
   })

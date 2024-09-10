@@ -1,17 +1,20 @@
 import nodemailer from 'nodemailer';
+import { envs } from '../config/envs';
+
+
 
 const transporter = nodemailer.createTransport({
-  service: 'gmail',
+  service: envs.MAILER_SERVICE,
   auth: {
-    user: 'rubenramirez.arellano99@gmail.com',  
-    pass: 'mtekrwnxlcrnvwdh'     
+    user: envs.MAILER_EMAIL,  
+    pass: envs.MAILER_ACCESS_TOKEN
   }
 });
 
 export const sendEmail = async (subject: string, text: string) => {
   const mailOptions = {
-    from: 'rubenramirez.arellano99@gmail.com',  //De donde se manda el email
-    to: 'rubenramirez.arellano99@gmail.com',  // A quien le llegara el email
+    from: envs.MAILER_EMAIL,  //De donde se manda el email
+    to: envs.MAILER_EMAIL,  // A quien le llegara el email
     text,
     subject
   };
