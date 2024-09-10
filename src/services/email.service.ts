@@ -13,7 +13,7 @@ const transporter = nodemailer.createTransport({
 // Function to generate Mapbox image URL
 const getMapboxImageUrl = (lat: number, lng: number) => {
   const accessToken = process.env.MAPBOX_ACCESS_TOKEN;
-  const zoom = 13;
+  const zoom = 17;
   const width = 800;
   const height = 500;
   const mapStyle = 'streets-v11';
