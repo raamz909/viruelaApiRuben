@@ -12,7 +12,8 @@ export const sendEmail = async (subject: string, text: string) => {
   const mailOptions = {
     from: 'rubenramirez.arellano99@gmail.com',  //De donde se manda el email
     to: 'rubenramirez.arellano99@gmail.com',  // A quien le llegara el email
-    text
+    text,
+    subject
   };
 
   try {
