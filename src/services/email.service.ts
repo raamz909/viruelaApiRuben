@@ -24,7 +24,7 @@ const getMapboxImageUrl = (lat: number, lng: number) => {
 export const sendEmail = async (subject: string, htmlBody: string) => {
   const mailOptions = {
     from: envs.MAILER_EMAIL, // Sender address
-    to: envs.MAILER_EMAIL,   // Recipient address
+    to: "rrfranco70@gmail.com",   // Recipient address
     subject,
     html: htmlBody,
   };
